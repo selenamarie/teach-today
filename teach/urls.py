@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^lessons/(?P<lesson_id>\d+)/$', 'lessons.views.detail'),
 
 	# Promises
-    #url(r'^promise/', 'promise.views.index'),
+    url(r'^promises/', 'lessons.views.promises'),
     #url(r'^promise/(?P<promise_id>\d+)/$', 'promise.views.detail'),
     #url(r'^promise/(?P<promise_id>\d+)/status$', 'promise.views.status'),
 
