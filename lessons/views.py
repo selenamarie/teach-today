@@ -17,3 +17,9 @@ def promises(request):
 	latest_promises = Promise.objects.all()
 	return render_to_response('lessons/promises.html', {'latest_promises': latest_promises})
 
+def promise_detail(request, promise_id):
+	p = get_object_or_404(Promise, pk=promise_id)
+	return render_to_response('lessons/promise_detail.html', {'promise': p})
+
+def keep(request, promise_id):
+	return HttpResponse("Kept promise %s" % promise_id)

@@ -17,8 +17,9 @@ urlpatterns = patterns('',
     url(r'^lessons/(?P<lesson_id>\d+)/$', 'lessons.views.detail'),
 
 	# Promises
-    url(r'^promises/', 'lessons.views.promises'),
-    #url(r'^promise/(?P<promise_id>\d+)/$', 'promise.views.detail'),
+    url(r'^promises/$', 'lessons.views.promises'),
+    url(r'^promises/(?P<promise_id>\d+)/$', 'lessons.views.promise_detail'),
+    url(r'^promises/(?P<promise_id>\d+)/keep$', 'lessons.views.keep'),
     #url(r'^promise/(?P<promise_id>\d+)/status$', 'promise.views.status'),
 
     # Uncomment the next line to enable the admin:

@@ -1,0 +1,9 @@
+{% if latest_promises %}
+	<ul>
+	{% for promise in latest_promises %}
+		<li><a href="/promises/{{ promise.id }}/">{{promise}}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No Lessons available</p>
+{% endif %}

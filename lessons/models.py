@@ -17,4 +17,4 @@ class Promise(models.Model):
 	done = models.BooleanField(default=False)
 
 	def __unicode__(self):
-		return self.who + self.when + self.lesson.name
+		return "Teach %s For %s On " % (self.lesson.name, self.who)
