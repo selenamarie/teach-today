@@ -1,1 +1,15 @@
 {{promise}}
+
+{% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
+
+<form action="/lessons/promises/{{promise.id}}/keep/" method="post">
+
+{% csrf_token %}
+<input type="radio" name="done" id="True" value="True"
+{% if promise.done %} checked {% endif %}/>
+<label for="True">True</label>
+<input type="radio" name="done" id="False" value="False"
+{% if not promise.done %} checked {% endif %}/>
+<label for="False">False</label>
+<input type="submit" value="Keep" />
+</form>

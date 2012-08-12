@@ -1,5 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import Http404
+from django.http import Http404,HttpResponseRedirect,HttpResponse
+from django.core.urlresolvers import reverse
+from django.template import RequestContext
 
 from lessons.models import Lesson, Promise
 
@@ -19,7 +21,28 @@ def promises(request):
 
 def promise_detail(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
-	return render_to_response('lessons/promise_detail.html', {'promise': p})
+	return render_to_response('lessons/promise_detail.html', {'promise': p},
+                               context_instance=RequestContext(request))
 
 def keep(request, promise_id):
-	return HttpResponse("Kept promise %s" % promise_id)
+	p = get_object_or_404(Promise, pk=promise_id)
+	try:
+		if request.POST['done'] == 'False': 
+			p.done = False
+		else:
+			p.done = True
+		p.save()
+	except (KeyError, Promise.DoesNotExist):
+		# Redisplay form
+		return render_to_response('promises/detail.html', {
+			'promise': p,
+			'error_message': "You didn't keep a promise!",
+		}, context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+
+def keep_promise(request, promise_id):
+	p = get_object_or_404(Promise, pk=promise_id)
+	return render_to_response('lessons/promise_detail.html', {'promise': p},
+                               context_instance=RequestContext(request))
+
