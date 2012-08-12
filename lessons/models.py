@@ -18,3 +18,9 @@ class Promise(models.Model):
 
 	def __unicode__(self):
 		return "Teach <a href='/lessons/%i/'>%s</a> for <strong>%s</strong> on " % (self.lesson.id, self.lesson.name, self.who)
+
+class Assessment(models.Model):
+	question = models.CharField(max_length=200)
+	pre = models.TextField()
+	post = models.TextField()
+	who = models.CharField(max_length=200)
