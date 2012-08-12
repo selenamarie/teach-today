@@ -17,4 +17,4 @@ class Promise(models.Model):
 	done = models.BooleanField(default=False)
 
 	def __unicode__(self):
-		return "Teach %s For %s On " % (self.lesson.name, self.who)
+		return "Teach <a href='/lessons/%i/'>%s</a> for <strong>%s</strong> on " % (self.lesson.id, self.lesson.name, self.who)

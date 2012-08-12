@@ -5,6 +5,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', 'teach.views.main_page'),
+    # Login / logout.
+    (r'^login/$', 'django.contrib.auth.views.login'),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    (r'^logout/$', 'teach.views.logout_page'),
+    (r'^portal/$', include('portal.urls')),
 	url(r'^lessons/', include('lessons.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

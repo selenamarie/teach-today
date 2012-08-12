@@ -1,7 +1,7 @@
 {% if latest_lessons %}
 	<ul>
 	{% for lesson in latest_lessons %}
-		<li><a href="/lessons/{{ lesson.id }}/">{{lesson.name}}</a></li>
+		<li><a href="/lessons/{{ lesson.id }}/">{{lesson.name}}</a> <a href="{{lesson.url}}">Resource</a></li>
 	{% endfor %}
 	</ul>
 {% else %}

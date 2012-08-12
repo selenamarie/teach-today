@@ -1,7 +1,7 @@
 {% if latest_promises %}
 	<ul>
 	{% for promise in latest_promises %}
-		<li><a href="/lessons/promises/{{ promise.id }}/">{{promise}}</a></li>
+		<li>Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}</li>
 	{% endfor %}
 	</ul>
 {% else %}
