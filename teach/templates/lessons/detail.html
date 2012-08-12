@@ -1,3 +1,16 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Teach a Lesson Today | {% block title %}{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Teach a Lesson Today | Lessons | {{lesson.name}}</h1>
+	</header>
+
+
 <p>
 <a href="/lessons/{{ lesson.id }}/">{{lesson.name}}</a> Resource: <a href="{{lesson.url}}">{{lesson.url}}</a>
 </p>
@@ -5,3 +18,4 @@
 <p>
 <a href="/lessons/">Back</a>
 </p>
+{% endblock %}

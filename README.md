@@ -13,3 +13,4 @@ People should be able to add lessons concerning programming and then make "promi
 * https://docs.djangoproject.com/en/1.4/intro
 * https://docs.djangoproject.com/en/1.4/topics/auth/
 * http://neverfear.org/blog/view/97/User_Authentication_With_Django
+* http://twitter.github.com/bootstrap

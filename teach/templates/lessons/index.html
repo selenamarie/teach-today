@@ -1,3 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Teach a Lesson Today | {% block title %}{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Teach a Lesson Today | Lessons</h1>
+    </header>
+
 {% if latest_lessons %}
 	<ul>
 	{% for lesson in latest_lessons %}
@@ -7,3 +19,5 @@
 {% else %}
 	<p>No Lessons available</p>
 {% endif %}
+
+{% endblock %}

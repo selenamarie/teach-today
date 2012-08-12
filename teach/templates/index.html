@@ -1,4 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Teach a Lesson Today| {% block title %}{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Teach a Lesson Today | Main</h1>
+    </header>
+
 <ul>
 	<li><a href="lessons/">Lessons</a></li>
 	<li><a href="lessons/promises">Promises</a></li>
 </ul>
+
+{% endblock %}

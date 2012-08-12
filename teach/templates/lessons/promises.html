@@ -1,9 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Teach a Lesson Today | {% block title %}Promises{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Teach a Lesson Today | Promises | {{promise}}</h1>
+	</header>
+
+
 {% if latest_promises %}
 	<ul>
 	{% for promise in latest_promises %}
-		<li>Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}</li>
+		<li>Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}, <a href="{{ promise.id }}">Edit</a></li>
 	{% endfor %}
 	</ul>
 {% else %}
 	<p>No Lessons available</p>
 {% endif %}
+
+{% endblock %}

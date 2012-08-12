@@ -1,4 +1,16 @@
-Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Teach a Lesson Today| {% block title %}{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+
+    <header>
+        <h1>Teach a Lesson Today | Promises | {{promise.id}} </h1>
+    </header>
+
+I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}
 
 {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
 
@@ -7,9 +19,11 @@ Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <s
 {% csrf_token %}
 <input type="radio" name="done" id="True" value="True"
 {% if promise.done %} checked {% endif %}/>
-<label for="True">True</label>
+<label for="True">Yes, I did it!</label>
 <input type="radio" name="done" id="False" value="False"
 {% if not promise.done %} checked {% endif %}/>
-<label for="False">False</label>
-<input type="submit" value="Keep" />
+<label for="False">Not yet</label>
+<input type="submit" value="Update" />
 </form>
+
+{% endblock %}
