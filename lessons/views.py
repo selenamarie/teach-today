@@ -50,6 +50,11 @@ def keep(request, promise_id):
 @login_required
 def keep_promise(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
-	return render_to_response('lessons/promise_detail.html', {'promise': p},
-                               context_instance=RequestContext(request))
+	if p.done == True:
+		return render_to_response('assessments/detail.html', {
+			'promise': p,
+		}, context_instance=RequestContext(request))
+	else:
+		return render_to_response('lessons/promise_detail.html', {'promise': p},
+								   context_instance=RequestContext(request))
 
