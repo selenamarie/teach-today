@@ -14,17 +14,13 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 
 {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
 
-<form action="/lessons/promises/{{promise.id}}/keep/" method="post">
+<!-- protip: posting to itself is totally awesome -->
+<form action="" method="post">
 
 {% csrf_token %}
 
+{{ form.done }}
 
-<input type="radio" name="done" id="True" value="True"
-{% if promise.done %} checked {% endif %}/>
-<label for="True">Yes, I did it!</label>
-<input type="radio" name="done" id="False" value="False"
-{% if not promise.done %} checked {% endif %}/>
-<label for="False">Not yet</label>
 <input type="submit" value="Update" />
 </form>
 

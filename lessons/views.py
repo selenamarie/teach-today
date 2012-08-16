@@ -38,14 +38,21 @@ def keep(request, promise_id):
 		if form.is_valid(): # if someone is being a jerk
 			p.done = form.cleaned_data['done']	
 			p.save()
-			return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+			print form.cleaned_data
+			if p.done:
+				return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+			else:
+				return render_to_response('lessons/promise_detail.html', {
+					'promise': p,
+					'form': form,
+					}, context_instance=RequestContext(request))
 		else: 
 			return render_to_response('lessons/promise_detail.html', {
 				'promise': p,
 				'form': form,
 				}, context_instance=RequestContext(request))
 	else:
-		form = PromiseForm()
+		form = PromiseForm({'done': p.done})
 		return render_to_response('lessons/promise_detail.html', {
 			'promise': p,
 			'form': form,
