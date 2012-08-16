@@ -1,5 +1,7 @@
 from django import forms #cuz it is a package
 
+# I HATE CHOICE FIELDS
+
 # lolling about the difference between ModelForm and Form
 class LessonAddForm(forms.Form):
 	name = forms.CharField()

@@ -17,6 +17,8 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 <form action="/lessons/promises/{{promise.id}}/keep/" method="post">
 
 {% csrf_token %}
+
+
 <input type="radio" name="done" id="True" value="True"
 {% if promise.done %} checked {% endif %}/>
 <label for="True">Yes, I did it!</label>

@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from lessons.models import Lesson, Promise
-from lessons.forms import LessonAddForm
+from lessons.forms import LessonAddForm, PromiseForm
 
 from django.http import HttpResponse
 
@@ -33,23 +33,27 @@ def promise_detail(request, promise_id):
 @login_required
 def keep(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
-	try:
-		if 'done' in request.POST:
-			p.done = False
-		else:
-			p.done = True
-		p.save()
-	except KeyError:
-		# Redisplay form
-		return render_to_response('promises/detail.html', {
-			'promise': p,
-			'error_message': "You didn't keep a promise!",
-		}, context_instance=RequestContext(request))
+	if request.method == 'POST':
+		form = PromiseForm(request.POST)
+		if form.is_valid(): # if someone is being a jerk
+			p.done = form.cleaned_data['done']	
+			p.save()
+			return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+		else: 
+			return render_to_response('lessons/promise_detail.html', {
+				'promise': p,
+				'form': form,
+				}, context_instance=RequestContext(request))
 	else:
-		return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+		form = PromiseForm()
+		return render_to_response('lessons/promise_detail.html', {
+			'promise': p,
+			'form': form,
+			}, context_instance=RequestContext(request))
 
 @login_required
 def keep_promise(request, promise_id):
+	# now you need to do a post assessment
 	p = get_object_or_404(Promise, pk=promise_id)
 	if p.done == True:
 		return render_to_response('assessments/detail.html', {
