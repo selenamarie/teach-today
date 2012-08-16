@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from lessons.models import Lesson, Promise
+from lessons.forms import LessonAddForm
 
 from django.http import HttpResponse
 
@@ -33,12 +34,12 @@ def promise_detail(request, promise_id):
 def keep(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
 	try:
-		if request.POST['done'] == 'False': 
+		if 'done' in request.POST:
 			p.done = False
 		else:
 			p.done = True
 		p.save()
-	except (KeyError, Promise.DoesNotExist):
+	except KeyError:
 		# Redisplay form
 		return render_to_response('promises/detail.html', {
 			'promise': p,
@@ -58,3 +59,20 @@ def keep_promise(request, promise_id):
 		return render_to_response('lessons/promise_detail.html', {'promise': p},
 								   context_instance=RequestContext(request))
 
+@login_required
+def lesson_add(request):
+	# This is how you do it with a functional view <side eye>
+	if request.method == 'POST':
+		form = LessonAddForm(request.POST)
+		if form.is_valid():
+			l = Lesson()
+			l.name = form.cleaned_data['name']
+			l.url = form.cleaned_data['url']
+			l.save()
+			return HttpResponseRedirect(reverse('lessons.views.detail', args=(l.id,)))
+		else:
+			# will return errors if any, and prepopulate what was passed in before
+			return render_to_response('lessons/add.html', { 'form': form }, context_instance=RequestContext(request))
+	else: 
+		form = LessonAddForm()	
+		return render_to_response('lessons/add.html', { 'form': form }, context_instance=RequestContext(request))

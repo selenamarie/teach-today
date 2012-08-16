@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% comment %}
+
+Add a lesson
+
+{% endcomment %}
+
+{% block head %}
+    <title>Teach a Lesson Today | Add a lesson</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Teach a Lesson Today</h1>
+        <h2>Login Page</h2>
+    </header>
+
+    <section>
+        {% if form.errors %}
+            <p>Something wasn't quite right in your lesson submission</p>
+        {% endif %}
+
+        <form method="post" action=".">
+		{% csrf_token %} 
+            <p>
+				{{ form.name.errors }}
+                <label for="lesson_name">Name of Lesson:</label>
+                {{ form.name }}
+			</p>
+            <p>
+				{{ form.url.errors }}
+                <label for="lesson_url">Link to resource for lesson:<label>
+                {{ form.url }}
+			</p>
+            <input type="submit" value="lesson" />
+		</form>
+	</section>
+{% endblock %}
