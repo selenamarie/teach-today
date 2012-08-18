@@ -15,7 +15,7 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
 
 <!-- protip: posting to itself is totally awesome -->
-<form action="" method="post">
+<form action="/lessons/promises/{{promise.id}}/keep/" method="post">
 
 {% csrf_token %}
 

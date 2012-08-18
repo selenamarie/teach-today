@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% comment %}
+
+Make a teaching promise
+
+{% endcomment %}
+
+{% block head %}
+    <title>Teach a Lesson Today | Make a teaching promise</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Teach a Lesson Today | Make a teaching promise</h1>
+    </header>
+
+    <section>
+        {% if form.errors %}
+            <p>Something wasn't quite right in your promise making</p>
+        {% endif %}
+
+        <form method="post" action=".">
+		{% csrf_token %} 
+            <p>
+				{{ form.who.errors }}
+                <label for="promise_who">Who I promise to teach:</label>
+                {{ form.who }}
+			</p>
+            <p>
+				{{ form.when.errors }}
+                <label for="promise_when">When Am I going to teach this:<label>
+                {{ form.when }}
+			</p>
+            <p>
+				{{ form.lesson.errors }}
+                <label for="promise_lesson">Which lesson will I teach:<label>
+                {{ form.lesson }}
+            <input type="submit" value="lesson" />
+		</form>
+	</section>
+{% endblock %}

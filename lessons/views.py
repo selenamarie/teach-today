@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from lessons.models import Lesson, Promise
-from lessons.forms import LessonAddForm, PromiseForm
+from lessons.forms import LessonAddForm, PromiseForm, PromiseMakeForm
 
 from django.http import HttpResponse
 
@@ -27,7 +27,8 @@ def promises(request):
 @login_required
 def promise_detail(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
-	return render_to_response('lessons/promise_detail.html', {'promise': p},
+	form = PromiseForm(initial={'done': 1 if p.done else 0 })
+	return render_to_response('lessons/promise_detail.html', {'promise': p, 'form': form},
                                context_instance=RequestContext(request))
 
 @login_required
@@ -35,13 +36,14 @@ def keep(request, promise_id):
 	p = get_object_or_404(Promise, pk=promise_id)
 	if request.method == 'POST':
 		form = PromiseForm(request.POST)
-		if form.is_valid(): # if someone is being a jerk
-			p.done = form.cleaned_data['done']	
-			p.save()
-			print form.cleaned_data
+		if form.is_valid(): # if someone is not being a jerk
+			p.done = True if form.cleaned_data['done'] == 1 else False
+			print p.done
 			if p.done:
+				p.save()
 				return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
 			else:
+				p.save()
 				return render_to_response('lessons/promise_detail.html', {
 					'promise': p,
 					'form': form,
@@ -87,3 +89,25 @@ def lesson_add(request):
 	else: 
 		form = LessonAddForm()	
 		return render_to_response('lessons/add.html', { 'form': form }, context_instance=RequestContext(request))
+
+@login_required
+def promise_add(request):
+	# This is how you do it with a functional view <side eye>
+	if request.method == 'POST':
+		form = PromiseMakeForm(request.POST)
+		if form.is_valid():
+			p = Promise()
+			p.who = form.cleaned_data['who']
+			p.lesson = Lesson.objects.get(pk=form.cleaned_data['lesson'])
+			p.when = form.cleaned_data['when']
+			p.save()
+			return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
+		else:
+			# will return errors if any, and prepopulate what was passed in before
+			return render_to_response('lessons/promise_add.html', { 'form': form }, context_instance=RequestContext(request))
+	else: 
+		form = PromiseMakeForm()	
+		return render_to_response('lessons/promise_add.html', { 'form': form }, context_instance=RequestContext(request))
+
+
+
