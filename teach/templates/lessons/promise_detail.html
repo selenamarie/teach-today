@@ -19,9 +19,9 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 
 {% csrf_token %}
 
-{{ form.done }}
+{{ form|as_bootstrap }}
 
-<input type="submit" value="Update" />
+<input type="submit" value="Update" class="btn primary"/>
 </form>
 
 <p>
