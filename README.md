@@ -18,3 +18,17 @@ People should be able to add lessons concerning programming and then make "promi
 == Research about the economy and education
 
 * http://www.nsf.gov/statistics/seind12/c0/c0i.htm
+
+== SETUP
+
+Environment Variables
+
+export DATABASE_URL = 'postgres://teach_www@localhost:5432/teach'
+export TWITTER_CONSUMER_KEY = 'some stuff here'
+export TWITTER_CONSUMER_SECRET = 'some other secret stuff'
+
+== TODO
+
+
+* Set up Email capability for this
+* Set up robot@teach2day.org email

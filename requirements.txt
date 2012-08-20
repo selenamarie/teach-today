@@ -1,6 +1,7 @@
 Django==1.4.1
 dj-database-url==0.2.1
 django-bootstrap-toolkit==2.5.4
+django-profiles==0.2
 django-social-auth==0.7.4
 httplib2==0.7.4
 oauth2==1.5.211
