@@ -26,3 +26,13 @@ def profile(request):
     promises = Promise.objects.filter(made_by=request.user.id)
     return render_to_response('profiles/profile_detail.html', {'profile': up, 'promises': promises})
     return HttpResponseRedirect('/')
+
+@login_required
+def profile_individual(request, user):
+    """
+    Show a user profile
+    """
+    up = UserProfile.objects.get(user=user)
+    promises = Promise.objects.filter(made_by=user)
+    return render_to_response('profiles/profile_detail.html', {'profile': up, 'promises': promises})
+    return HttpResponseRedirect('/')

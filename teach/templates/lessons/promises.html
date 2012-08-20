@@ -13,7 +13,7 @@ Promises
 {% if latest_promises %}
 	<ul>
 	{% for promise in latest_promises %}
-		<li>Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}, <a href="{{ promise.id }}">Edit</a></li>
+		<li><a href="{% url teach.views.profile %}{{ promise.made_by.id }}">{{ promise.made_by.username }}</a> promised to teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}, <a href="{{ promise.id }}">Edit</a></li>
 	{% endfor %}
 	</ul>
 {% else %}
