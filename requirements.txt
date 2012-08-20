@@ -1,0 +1,9 @@
+Django==1.4.1
+dj-database-url==0.2.1
+django-bootstrap-toolkit==2.5.4
+django-social-auth==0.7.4
+httplib2==0.7.4
+oauth2==1.5.211
+psycopg2==2.4.5
+python-openid==2.2.5
+wsgiref==0.1.2
