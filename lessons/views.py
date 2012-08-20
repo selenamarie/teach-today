@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404,HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
+from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
 
@@ -98,8 +99,9 @@ def promise_add(request):
         if form.is_valid():
             p = Promise()
             p.who = form.cleaned_data['who']
-            p.lesson = Lesson.objects.get(pk=form.cleaned_data['lesson'])
+            p.made_by = User.objects.get(pk=form.cleaned_data['made_by'])
             p.when = form.cleaned_data['when']
+            p.lesson = Lesson.objects.get(pk=form.cleaned_data['lesson'])
             p.save()
             return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
         else:
