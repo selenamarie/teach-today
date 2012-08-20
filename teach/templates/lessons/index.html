@@ -7,16 +7,18 @@ Lessons
 
 {% block body %}
 
+<p>
 <a href="/lessons/add">Add a new lesson!</a>
+</p>
 
 {% if latest_lessons %}
-	<ul>
-	{% for lesson in latest_lessons %}
-		<li><a href="/lessons/{{ lesson.id }}/">{{lesson.name}}</a> <a href="{{lesson.url}}">Resource</a></li>
-	{% endfor %}
-	</ul>
+    <ul>
+    {% for lesson in latest_lessons %}
+        <li><a href="/lessons/{{ lesson.id }}/">{{lesson.name}}</a> <a href="{{lesson.url}}">Resource</a></li>
+    {% endfor %}
+    </ul>
 {% else %}
-	<p>No Lessons available</p>
+    <p>No Lessons available</p>
 {% endif %}
 
 {% endblock %}
