@@ -1,5 +1,6 @@
 # Django settings for teach project.
 import os
+from os import environ
 from django.template.defaultfilters import slugify 
 
 DEBUG = True
@@ -199,5 +200,4 @@ SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
 SOCIAL_AUTH_SANITIZE_REDIRECTS = False
 
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-
+DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}

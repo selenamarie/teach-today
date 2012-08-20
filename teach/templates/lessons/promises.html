@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block head %}
-    <title>Teach a Lesson Today | {% block title %}Promises{% endblock %}</title>
+{% block title %}
+Promises
 {% endblock %}
 
 {% block body %}
 
-    <header>
-        <h1>Teach a Lesson Today | Promises </h1>
-	</header>
+<p>
+<a href="{% url lessons.views.promise_add %}">Make a promise!</a>
+</p>
 
 {% if latest_promises %}
 	<ul>
@@ -17,11 +17,7 @@
 	{% endfor %}
 	</ul>
 {% else %}
-	<p>No Lessons available</p>
+	<p>No Promises currently made </p>
 {% endif %}
-<p>
-<a href="/lessons/promises">Other Promises</a> | 
-<a href="/lessons">Lessons</a>
-</p>
 
 {% endblock %}
