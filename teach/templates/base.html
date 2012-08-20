@@ -7,47 +7,48 @@ This template is a completely 100% generic HTML5 template.
 <!DOCTYPE html>
 <html>
     <head>
-		{% load bootstrap_toolkit %}
+        {% load bootstrap_toolkit %}
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
 
-		<style type="text/css">
-			body {
-				padding-top: 60px;
-				padding-left: 60px;
-				padding-right: 60px;
-			}
-		</style>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-		{% bootstrap_javascript_tag "dropdown" %}
-		{% block head %}
-			<title>Teach a Lesson Today | {% block title %}{% endblock %}</title>
-		{% endblock %}
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-left: 60px;
+                padding-right: 60px;
+            }
+        </style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        {% bootstrap_javascript_tag "dropdown" %}
+        {% block head %}
+            <title>Teach a Lesson Today | {% block title %}{% endblock %}</title>
+        {% endblock %}
 
-		</head>
+        </head>
 
-		<body>
+        <body>
 
-		{% block nav %}
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="/">Teach a Lesson Today</a>
-					   <ul class="nav">
-							<li><a href="{% url lessons.views.index %}" class="">Lessons</a></li>
-							<li><a href="{% url lessons.views.lesson_add%}">Add Lesson</a></li>
-							<li><a href="{% url lessons.views.promises %}">Promises</a></li>
-							<li><a href="{% url lessons.views.promise_add %}">Add Promise</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			{% endblock %}
+        {% block nav %}
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">Teach a Lesson Today</a>
+                       <ul class="nav">
+                            <li><a href="{% url lessons.views.index %}" class="">Lessons</a></li>
+                            <!-- <li><a href="{% url lessons.views.lesson_add%}">Add Lesson</a></li> --> 
+                            <li><a href="{% url lessons.views.promises %}">Promises</a></li>
+                            <!-- <li><a href="{% url lessons.views.promise_add %}">Add Promise</a></li> -->
+                            <li><a href="{% url teach.views.profile %}">Me</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
 
-		<p>
-		&nbsp;
-		</p>
+        <p>
+        &nbsp;
+        </p>
         {% block body %}{% endblock %}
     </body>
 </html>

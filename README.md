@@ -29,6 +29,9 @@ export TWITTER_CONSUMER_SECRET = 'some other secret stuff'
 
 == TODO
 
-
+* Make "add" for lessons and promises submenus
 * Set up Email capability for this
 * Set up robot@teach2day.org email
+
+
+
