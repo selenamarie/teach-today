@@ -14,19 +14,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'teach',                      # Or path to database file if using sqlite3.
-        'USER': 'teach_www',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -86,8 +73,6 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'xkc&amp;!m4gf&amp;=j!uvsz^p3gifx3f2ho831+pm1kdaz*^bmnve$b*'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -143,6 +128,8 @@ INSTALLED_APPS = (
     'portal',
     'lessons',
 	'social_auth',
+	'profiles',
+	'teach',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -183,8 +170,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Set up Twitter OAuth keys
-TWITTER_CONSUMER_KEY         = 'Phof3Gunxjj2hQqg485Ag'
-TWITTER_CONSUMER_SECRET      = 'vwUiyklP8SLNLyIC0TqFJ1JPNI2TJ67K9g6EnEDIPI'
+# Set these with environment variables in your activate virtualenv script
+TWITTER_CONSUMER_KEY         = os.environ.get('TWITTER_CONSUMER_KEY')
+TWITTER_CONSUMER_SECRET      = os.environ.get('TWITTER_CONSUMER_SECRET')
 
 # Set up login URLs
 LOGIN_URL          = '/login/'
@@ -201,3 +189,9 @@ SOCIAL_AUTH_SANITIZE_REDIRECTS = False
 
 import dj_database_url
 DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+
+# user profiles
+AUTH_PROFILE_MODULE = 'teach.UserProfile'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = os.environ.get('SECRET_KEY')
