@@ -3,6 +3,9 @@
 {% block title %}View Profile{% endblock %}
  
 {% block body %}
-{{ user }}
+<ul>
+	<li><i>Your username is</i>: {{ profile.user.username }}</li>
+	<li><i>Your favorite animals are</i>: {{ profile.favorite_animal }}</li>
+</ul>
  
 {% endblock body %}
