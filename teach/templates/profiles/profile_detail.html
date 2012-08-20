@@ -7,5 +7,16 @@
 	<li><i>Your username is</i>: {{ profile.user.username }}</li>
 	<li><i>Your favorite animals are</i>: {{ profile.favorite_animal }}</li>
 </ul>
+
+{% if promises %}
+<p>Promises you've made:</p>
+<ul>
+	{% for promise in promises %}
+		<li><a href="/lessons/promises/{{ promise.id }}/">{{promise.lesson}} to {{ promise.who }} on {{ promise.when|date:"m/d/Y" }}</li>
+	{% endfor %}
+</ul>
+{% else %}
+	<p>No Promises currently made</p>
+{% endif %}
  
 {% endblock body %}
