@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     (r'^portal/$', include('portal.urls')),
 	url(r'^lessons/', include('lessons.urls')),
     url(r'^admin/', include(admin.site.urls)),
+	url(r'', include('social_auth.urls')),
 )

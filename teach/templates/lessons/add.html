@@ -1,19 +1,17 @@
 {% extends "base.html" %}
+
 {% comment %}
 
 Add a lesson
 
 {% endcomment %}
-{% load bootstrap_toolkit %}
 
-{% block head %}
-    <title>Teach a Lesson Today | Add a lesson</title>
+
+{% block title %}
+Add a lesson
 {% endblock %}
 
 {% block body %}
-    <header>
-        <h1>Teach a Lesson Today | Add a lesson</h1>
-    </header>
 
     <section>
         {% if form.errors %}

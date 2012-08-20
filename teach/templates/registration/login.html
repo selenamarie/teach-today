@@ -5,20 +5,19 @@ Login page to authenticate users.
 
 {% endcomment %}
 
-{% block head %}
-    <title>Teach a Lesson Today | Login</title>
+{% block title %}
+Login
 {% endblock %}
 
 {% block body %}
-    <header>
-        <h1>Teach a Lesson Today</h1>
-        <h2>Login Page</h2>
-    </header>
 
     <section>
         {% if form.errors %}
             <p>Your username and password didn't match, please try again.</p>
         {% endif %}
+		<ul>
+		<li><a href="{% url socialauth_begin 'twitter' %}?next={{ next }}">Login with Twitter</a></li>
+		</ul>
 
         <form method="post" action=".">
 		{% csrf_token %} 

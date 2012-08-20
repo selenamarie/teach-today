@@ -2,14 +2,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Lessons
+Lessons
 {% endblock %}
 
 {% block body %}
-
-    <header>
-        <h1>Teach a Lesson Today | Lessons</h1>
-    </header>
 
 <a href="/lessons/add">Add a new lesson!</a>
 
@@ -22,10 +18,5 @@
 {% else %}
 	<p>No Lessons available</p>
 {% endif %}
-
-<p>
-<a href="/lessons/promises">Other Promises</a> | 
-<a href="/lessons">Lessons</a>
-</p>
 
 {% endblock %}

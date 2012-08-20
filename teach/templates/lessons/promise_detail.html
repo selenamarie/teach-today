@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-{% block head %}
-    <title>Teach a Lesson Today| {% block title %}{% endblock %}</title>
+
+{% block title %}
+Promise | Promise to {{ promise.who }} 
 {% endblock %}
 
 {% block body %}
-
-    <header>
-        <h1>Teach a Lesson Today | Promises | {{promise.id}} </h1>
-    </header>
+{% load bootstrap_toolkit %}
 
 I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}
 
@@ -23,10 +21,5 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 
 <input type="submit" value="Update" class="btn primary"/>
 </form>
-
-<p>
-<a href="/lessons/promises">Other Promises</a> | 
-<a href="/lessons">Lessons</a>
-</p>
 
 {% endblock %}

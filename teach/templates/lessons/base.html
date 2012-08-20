@@ -7,12 +7,16 @@ This template is a completely 100% generic HTML5 template.
 <!DOCTYPE html>
 <html>
     <head>
+		{% load bootstrap_toolkit %}
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        {% block head %}{% endblock %}
-		{% bootstrap_stylesheet_tag %}
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/bootstrap.css">
+
 		<style type="text/css">
 			body {
 				padding-top: 60px;
+				padding-left: 60px;
+				padding-right: 60px;
 			}
 		</style>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -25,33 +29,25 @@ This template is a completely 100% generic HTML5 template.
 
 		<body>
 
-		{% load bootstrap_toolkit %}
 		{% block nav %}
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<a class="brand" href="/">Teach a Lesson Today</a>
 					   <ul class="nav">
-							<li><a href="{% url lessons.views.index %}" class="">Home</a></li>
-							<li><a href="{% url lessons.views.lesson_add%}">Add</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Forms<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<a href="{% url test_bootstrap.views.test_form %}?layout=vertical">Vertical</a>
-									<a href="{% url test_bootstrap.views.test_form %}?layout=horizontal">Horizontal</a>
-									<a href="{% url test_bootstrap.views.test_form_inline %}?layout=inline">Inline</a>
-									<a href="{% url test_bootstrap.views.test_form_inline %}?layout=search">Search</a>
-									<a href="{% url test_bootstrap.views.test_form_with_template %}?layout=horizontal">Using template</a>
-								</ul>
-							</li>
-							<li><a href="{% url tabs %}">Tabs</a></li>
-							<li><a href="{% url contact %}">Contact</a></li>
+							<li><a href="{% url lessons.views.index %}" class="">Lessons</a></li>
+							<li><a href="{% url lessons.views.lesson_add%}">Add Lesson</a></li>
+							<li><a href="{% url lessons.views.promises %}">Promises</a></li>
+							<li><a href="{% url lessons.views.promise_add %}">Add Promise</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			{% endblock %}
 
+		<p>
+		&nbsp;
+		</p>
         {% block body %}{% endblock %}
     </body>
 </html>

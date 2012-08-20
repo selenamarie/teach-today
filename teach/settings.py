@@ -1,5 +1,6 @@
 # Django settings for teach project.
 import os
+from django.template.defaultfilters import slugify 
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -70,6 +71,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+	os.path.join(PROJECT_ROOT, "static"),
+	os.path.join(PROJECT_ROOT, "../lessons/static"),
 )
 
 # List of finder classes that know how to find static files in
@@ -88,6 +91,16 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+	'social_auth.context_processors.social_auth_by_type_backends',
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,6 +139,7 @@ INSTALLED_APPS = (
 	'bootstrap_toolkit',
     'portal',
     'lessons',
+	'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -156,3 +170,31 @@ LOGGING = {
         },
     }
 }
+
+
+# django-social-auth  specific settings
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    #'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Set up Twitter OAuth keys
+TWITTER_CONSUMER_KEY         = 'Phof3Gunxjj2hQqg485Ag'
+TWITTER_CONSUMER_SECRET      = 'vwUiyklP8SLNLyIC0TqFJ1JPNI2TJ67K9g6EnEDIPI'
+
+# Set up login URLs
+LOGIN_URL          = '/login/'
+#LOGIN_REDIRECT_URL = '/',
+#LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('twitter')
+SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_DEFAULT_USERNAME = lambda u: slugify(u) # you'll need to import slugify from 'django.template.defaultfilters'
+SOCIAL_AUTH_EXTRA_DATA = True
+SOCIAL_AUTH_CHANGE_SIGNAL_ONLY = True
+SOCIAL_AUTH_SANITIZE_REDIRECTS = False
+
+
+
