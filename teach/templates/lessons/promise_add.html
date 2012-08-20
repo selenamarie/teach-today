@@ -17,22 +17,23 @@ Make a teaching promise
         {% endif %}
 
         <form method="post" action=".">
-		{% csrf_token %} 
+        {% csrf_token %} 
             <p>
-				{{ form.who.errors }}
+                {{ form.who.errors }}
                 <label for="promise_who">Who I promise to teach:</label>
                 {{ form.who }}
-			</p>
+            </p>
             <p>
-				{{ form.when.errors }}
+                {{ form.when.errors }}
                 <label for="promise_when">When Am I going to teach this:<label>
                 {{ form.when }}
-			</p>
+            </p>
             <p>
-				{{ form.lesson.errors }}
+                {{ form.lesson.errors }}
                 <label for="promise_lesson">Which lesson will I teach:<label>
                 {{ form.lesson }}
+                <input type="hidden" name="promise_made_by" value="{{ made_by }}" />
             <input type="submit" value="lesson" />
-		</form>
-	</section>
+        </form>
+    </section>
 {% endblock %}

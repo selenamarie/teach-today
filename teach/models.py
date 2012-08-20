@@ -12,7 +12,6 @@ class UserProfile(models.Model):
         return self.user.username
 
 # definition of UserProfile from above
-# ...
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
