@@ -10,10 +10,26 @@
 <header>
 	<h1>Assessments</h1>
 </header>
+    <section>
+        {% if form.errors %}
+            <p>Something wasn't quite right in assessment form!</p>
+        {% endif %}
+
+        <form method="post" action=".">
+        {% csrf_token %} 
 
 {% if assessment %}
+    
+<p>
+    {{ form.post.errors }}
+    {{ assessment.question }}
+</p>
+<p>
+    {{ form.post }}
+</p>
 
 
 {% endif %}
+            <input type="submit" value="Assess!" />
 
 {% endblock %}

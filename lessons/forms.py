@@ -27,3 +27,5 @@ class PromiseMakeForm(forms.Form):
         super(PromiseMakeForm, self).__init__(*args, **kwargs)
         self.fields['lesson'] = forms.ChoiceField(choices=[ (o.id, str(o)) for o in Lesson.objects.all()])
 
+class AssessmentForm(forms.Form):
+    post = forms.CharField()

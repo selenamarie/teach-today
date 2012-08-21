@@ -11,18 +11,26 @@ class Lesson(models.Model):
     def __unicode__(self):
         return self.name
 
+class Assessment(models.Model):
+    question = models.CharField(max_length=200)
+    # probably include possible answers, later
+
+    def __unicode__(self):
+        return self.question
+
 class Promise(models.Model):
     who = models.CharField(max_length=200)
     when = models.DateTimeField('when')
     lesson = models.ForeignKey(Lesson)
     done = models.BooleanField(default=False)
     made_by = models.ForeignKey(User)
+    assessment = models.ForeignKey(Assessment)
 
     def __unicode__(self):
         return "Teach <a href='/lessons/%i/'>%s</a> for <strong>%s</strong> on " % (self.lesson.id, self.lesson.name, self.who)
 
-class Assessment(models.Model):
-    question = models.CharField(max_length=200)
+class AssessmentResponse(models.Model):
     pre = models.TextField()
     post = models.TextField()
-    who = models.CharField(max_length=200)
+    promise = models.ForeignKey(Promise)
+

@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
 
-from lessons.models import Lesson, Promise
-from lessons.forms import LessonAddForm, PromiseForm, PromiseMakeForm
+from lessons.models import Lesson, Promise, Assessment, AssessmentResponse
+from lessons.forms import LessonAddForm, PromiseForm, PromiseMakeForm, AssessmentForm
 
 from django.http import HttpResponse
 
@@ -42,7 +42,7 @@ def keep(request, promise_id):
             print p.done
             if p.done:
                 p.save()
-                return HttpResponseRedirect(reverse('lessons.views.keep_promise', args=(p.id,)))
+                return HttpResponseRedirect(reverse('lessons.views.assessment', args=(p.id,)))
             else:
                 p.save()
                 return render_to_response('lessons/promise_detail.html', {
@@ -60,18 +60,6 @@ def keep(request, promise_id):
             'promise': p,
             'form': form,
             }, context_instance=RequestContext(request))
-
-@login_required
-def keep_promise(request, promise_id):
-    # now you need to do a post assessment
-    p = get_object_or_404(Promise, pk=promise_id)
-    if p.done == True:
-        return render_to_response('assessments/detail.html', {
-            'promise': p,
-        }, context_instance=RequestContext(request))
-    else:
-        return render_to_response('lessons/promise_detail.html', {'promise': p},
-                                   context_instance=RequestContext(request))
 
 @login_required
 def lesson_add(request):
@@ -112,5 +100,29 @@ def promise_add(request):
         made_by = request.user.id
         return render_to_response('lessons/promise_add.html', { 'form': form, 'made_by': made_by }, context_instance=RequestContext(request))
 
-
-
+@login_required
+def do_assessment(request, promise_id):
+    """
+    Taking care of an assessment for a promise kept
+    """
+    if request.method == 'POST':
+        form = AssessmentForm(request.POST)
+        if form.is_valid():
+            ar = AssessmentResponse()
+            ar.post = form.cleaned_data['post']
+            ar.save()
+            return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
+    else: 
+        p = get_object_or_404(Promise, pk=promise_id)
+        a = get_object_or_404(Assessment, pk=p.assessment.id)
+        form = AssessmentForm()
+        if p.done == True:
+            return render_to_response('assessments/detail.html', {
+                'promise': p,
+                'assessment': a,
+                'form': form,
+            }, context_instance=RequestContext(request))
+        else:
+            # this is actually an error at this point...
+            return render_to_response('lessons/promise_detail.html', {'promise': p},
+                                       context_instance=RequestContext(request))
