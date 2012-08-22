@@ -8,7 +8,11 @@ Promise | Promise to {{ promise.who }}
 {% block body %}
 {% load bootstrap_toolkit %}
 
-I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}
+<h2>You just made a promise to:</h2>
+Teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}
+
+<h2>Your assessment question for this lesson is:</h2>
+{{ assessment }}
 
 {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
 
@@ -17,6 +21,9 @@ I taught <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to
 
 {% csrf_token %}
 
+<h2>
+Did you teach the lesson?
+</h2>
 {{ form|as_bootstrap }}
 
 <input type="submit" value="Update" class="btn primary"/>

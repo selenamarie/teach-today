@@ -28,8 +28,9 @@ def promises(request):
 @login_required
 def promise_detail(request, promise_id):
     p = get_object_or_404(Promise, pk=promise_id)
+    a = Assessment.objects.get(pk=p.assessment.id)
     form = PromiseForm(initial={'done': 1 if p.done else 0 })
-    return render_to_response('lessons/promise_detail.html', {'promise': p, 'form': form},
+    return render_to_response('lessons/promise_detail.html', {'promise': p, 'form': form, 'assessment': a},
                                context_instance=RequestContext(request))
 
 @login_required
@@ -40,22 +41,16 @@ def keep(request, promise_id):
         if form.is_valid(): # if someone is not being a jerk
             p.done = True if form.cleaned_data['done'] == 1 else False
             print p.done
-            if p.done:
+            if form.cleaned_data['done'] == 1:
                 p.save()
                 return HttpResponseRedirect(reverse('lessons.views.do_assessment', args=(p.id,)))
             else:
                 p.save()
-                return render_to_response('lessons/promise_detail.html', {
-                    'promise': p,
-                    'form': form,
-                    }, context_instance=RequestContext(request))
+                return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
         else: 
-            return render_to_response('lessons/promise_detail.html', {
-                'promise': p,
-                'form': form,
-                }, context_instance=RequestContext(request))
+            return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
     else:
-        form = PromiseForm({'done': p.done})
+        form = PromiseForm({'done': 1 if p.done else 0 })
         return render_to_response('lessons/promise_detail.html', {
             'promise': p,
             'form': form,
@@ -127,3 +122,10 @@ def do_assessment(request, promise_id):
             # this is actually an error at this point...
             return render_to_response('lessons/promise_detail.html', {'promise': p},
                                        context_instance=RequestContext(request))
+
+@login_required
+def add_assessment(request):
+    pass
+
+def list_assessments(request):
+    pass

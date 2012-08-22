@@ -33,6 +33,12 @@ Make a teaching promise
                 <label for="promise_lesson">Which lesson will I teach:<label>
                 {{ form.lesson }}
                 <input type="hidden" name="made_by" value="{{ made_by }}" />
+            <p>
+                {{ form.assessment.errors }}
+                <label for="promise_assessment">Which assessment to use:</label>
+                {{ form.assessment }} 
+                <br/>You can <a href="{% url lessons.views.add_assessment %}">add more assessments</a>.
+            </p>
             <input type="submit" value="lesson" />
         </form>
     </section>
