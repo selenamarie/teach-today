@@ -56,8 +56,8 @@ def profile_create(request, user_id):
             # will return errors if any -- TODO :D
             up = UserProfile()
             form = UserProfileForm()
-            return render_to_response('profiles/create_detail.html', {'profile': up, 'form': form})
+            return render_to_response('profiles/create_profile.html', {'profile': up, 'form': form})
     else:
         up = UserProfile()
         form = UserProfileForm()
-        return render_to_response('profiles/create_detail.html', {'profile': up, 'form': form})
+        return render_to_response('profiles/create_profile.html', {'profile': up, 'form': form})
