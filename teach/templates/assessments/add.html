@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Add an assessment question
+{% endblock %}
+
+{% block body %}
+
+<header>
+	<h1>Assessment questions</h1>
+</header>
+    <section>
+        {% if form.errors %}
+            <p>Something wasn't quite right in assessment form!</p>
+        {% endif %}
+
+        <form method="post" action=".">
+        {% csrf_token %} 
+<p>
+    {{ form.question.errors }}
+</p>
+<p>
+    {{ form.question }}
+</p>
+            <input type="submit" value="Add question!" />
+
+{% endblock %}
