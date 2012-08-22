@@ -42,7 +42,7 @@ def keep(request, promise_id):
             print p.done
             if p.done:
                 p.save()
-                return HttpResponseRedirect(reverse('lessons.views.assessment', args=(p.id,)))
+                return HttpResponseRedirect(reverse('lessons.views.do_assessment', args=(p.id,)))
             else:
                 p.save()
                 return render_to_response('lessons/promise_detail.html', {
@@ -109,9 +109,10 @@ def do_assessment(request, promise_id):
         form = AssessmentForm(request.POST)
         if form.is_valid():
             ar = AssessmentResponse()
+            ar.promise = Promise.objects.get(pk=promise_id)
             ar.post = form.cleaned_data['post']
             ar.save()
-            return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
+            return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(promise_id,)))
     else: 
         p = get_object_or_404(Promise, pk=promise_id)
         a = get_object_or_404(Assessment, pk=p.assessment.id)

@@ -9,8 +9,7 @@ urlpatterns = patterns('lessons.views',
     url(r'^promises/$', 'promises'),
     url(r'^promises/add/$', 'promise_add'),
     url(r'^promises/(?P<promise_id>\d+)/$', 'promise_detail'),
-    url(r'^promises/(?P<promise_id>\d+)/keep/$', 'keep'),
-    url(r'^promises/(?P<promise_id>\d+)/assessment$', 'do_assessment'),
+    url(r'^promises/(?P<promise_id>\d+)/keep/$', 'do_assessment'),
 
     # Uncomment the next line to enable the admin:
 )
