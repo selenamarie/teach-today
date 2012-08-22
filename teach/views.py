@@ -1,7 +1,10 @@
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import Http404,HttpResponseRedirect,HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.template import RequestContext
+from django.contrib.auth.models import User
 
 from teach.models import UserProfile
 from lessons.models import Promise
