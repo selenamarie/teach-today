@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 from teach.models import UserProfile
 from lessons.models import Promise
+from teach.forms import UserProfileForm
 
 def main_page(request):
     return render_to_response('index.html')
