@@ -82,9 +82,11 @@ def promise_add(request):
         if form.is_valid():
             p = Promise()
             p.who = form.cleaned_data['who']
-            p.made_by = User.objects.get(pk=form.cleaned_data['made_by'])
+            # hopefully this happens magically
+            p.made_by = User.objects.get(pk=request.user.id)
             p.when = form.cleaned_data['when']
             p.lesson = Lesson.objects.get(pk=form.cleaned_data['lesson'])
+            p.assessment = Assessment.objects.get(pk=form.cleaned_data['assessment'])
             p.save()
             return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
         else:
@@ -139,8 +141,11 @@ def add_assessment(request):
         form = AssessmentAddForm()
         return render_to_response('assessments/add.html', { 'form': form }, context_instance=RequestContext(request))
 
-
-
 def assessments(request):
     assessments = Assessment.objects.all()
     return render_to_response('assessments/all.html', { 'assessments': assessments }, context_instance=RequestContext(request))
+
+def front_page(request):
+    form = PromiseMakeForm()    
+    made_by = request.user.id if request.user.id else 'Bogus'
+    return render_to_response('lessons/promise_add.html', { 'form': form, 'made_by': made_by }, context_instance=RequestContext(request))

@@ -12,11 +12,22 @@ Make a teaching promise
 {% block body %}
 
     <section>
+        <h1 style="font-size: 56px; line-height: 70px;">
+
+        What if people  understood your work?
+        </h1>
+        <h2 style="color: #D5926A">
+        Would it help them understand you?  Teaching will make you a better programmer, a better coworker and a better lover.  Make the world better by promising to teach, today.
+        </h2>
+    </section>
+
+
+    <section>
         {% if form.errors %}
             <p>Something wasn't quite right in your promise making</p>
         {% endif %}
 
-        <form method="post" action=".">
+        <form method="post" action="/lessons/promises/add/">
         {% csrf_token %} 
             <p>
                 {{ form.who.errors }}

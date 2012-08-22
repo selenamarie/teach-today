@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, include, url
+from lessons import views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'teach.views.main_page'),
+    (r'^$', 'lessons.views.front_page'),
     # Login / logout.
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
