@@ -45,7 +45,7 @@ def profile_individual(request, user):
 def profile_create(request, user_id):
     # TODO: verify that user_id == logged in userid
     if request.method == 'POST':
-        form = UserProfileForm(requet.POST)
+        form = UserProfileForm(request.POST)
         if form.is_valid():
             up = UserProfile()
             up.user = User.objects.get(pk=form.cleaned_data['user_id'])
