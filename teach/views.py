@@ -54,9 +54,10 @@ def profile_create(request, user_id):
             return HttpResponseRedirect(reverse('teach.views.profile_individual', args=(form.cleaned_data['user_id'],)))
         else:
             # will return errors if any -- TODO :D
-            return render_to_response('profiles/create_detail.html', {'profile': up, 'promises': promises})
+            up = UserProfile()
+            form = UserProfileForm()
+            return render_to_response('profiles/create_detail.html', {'profile': up, 'form': form})
     else:
         up = UserProfile()
         form = UserProfileForm()
-        return render_to_response('profiles/create_detail.html', {'profile': up, 'promises': promises})
-
+        return render_to_response('profiles/create_detail.html', {'profile': up, 'form': form})
