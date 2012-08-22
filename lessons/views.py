@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from lessons.models import Lesson, Promise, Assessment, AssessmentResponse
-from lessons.forms import LessonAddForm, PromiseForm, PromiseMakeForm, AssessmentForm
+from lessons.forms import LessonAddForm, PromiseForm, PromiseMakeForm, AssessmentForm, AssessmentAddForm
 
 from django.http import HttpResponse
 
@@ -125,7 +125,22 @@ def do_assessment(request, promise_id):
 
 @login_required
 def add_assessment(request):
-    pass
+    if request.method == 'POST':
+        form = AssessmentAddForm(request.POST)
+        if form.is_valid(): 
+            assess = Assessment()
+            assess.question = form.cleaned_data['question']
+            print assess
+            assess.save()
+            return HttpResponseRedirect(reverse('lessons.views.assessments'))
+        else:
+            return render_to_response('assessments/add.html', { 'form': form }, context_instance=RequestContext(request))
+    else:
+        form = AssessmentAddForm()
+        return render_to_response('assessments/add.html', { 'form': form }, context_instance=RequestContext(request))
 
-def list_assessments(request):
-    pass
+
+
+def assessments(request):
+    assessments = Assessment.objects.all()
+    return render_to_response('assessments/all.html', { 'assessments': assessments }, context_instance=RequestContext(request))

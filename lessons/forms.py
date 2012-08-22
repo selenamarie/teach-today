@@ -30,3 +30,6 @@ class PromiseMakeForm(forms.Form):
 
 class AssessmentForm(forms.Form):
     post = forms.CharField()
+
+class AssessmentAddForm(forms.Form):
+    question = forms.CharField(max_length=200)
