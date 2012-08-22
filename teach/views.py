@@ -48,10 +48,10 @@ def profile_create(request, user_id):
         form = UserProfileForm(request.POST)
         if form.is_valid():
             up = UserProfile()
-            up.user = User.objects.get(pk=form.cleaned_data['user_id'])
+            up.user = User.objects.get(pk=user_id)
             up.favorite_animal = form.cleaned_data['favorite_animal']
             up.save()
-            return HttpResponseRedirect(reverse('teach.views.profile_individual', args=(form.cleaned_data['user_id'],)))
+            return HttpResponseRedirect(reverse('teach.views.profile_individual', args=(user_id)))
         else:
             # will return errors if any -- TODO :D
             up = UserProfile()
