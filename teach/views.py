@@ -30,34 +30,35 @@ def profile(request):
         promises = Promise.objects.filter(made_by=request.user.id)
         return render_to_response('profiles/profile_detail.html', {'profile': up, 'promises': promises})
     except: 
-        return HttpResponseRedirect(reverse('teach.views.profile_create', args=(request.user.id,)))
+        return HttpResponseRedirect(reverse('teach.views.profile_create_or_update', args=(request.user.id,)))
 
-@login_required
 def profile_individual(request, user):
     """
-    Show a user profile
+    Show a user profile other than our own
     """
-    up = UserProfile.objects.get(user=user)
+    u = User.objects.get(pk=user)
+    up = UserProfile.objects.get(user=u)
     promises = Promise.objects.filter(made_by=user)
     return render_to_response('profiles/profile_detail.html', {'profile': up, 'promises': promises})
 
 @login_required
-def profile_create(request, user_id):
-    # TODO: verify that user_id == logged in userid
+def profile_create_or_update(request):
+    # TODO: verify that request.user.id == logged in userid
+    user_obj = User.objects.get(pk=request.user.id)
+    up = ''
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
-            up = UserProfile()
-            up.user = User.objects.get(pk=user_id)
+            try: 
+                up = UserProfile.objects.get(user=user_obj)
+            except IntegrityError: 
+                up = UserProfile()
+            up.user = User.objects.get(pk=request.user.id)
             up.favorite_animal = form.cleaned_data['favorite_animal']
             up.save()
-            return HttpResponseRedirect(reverse('teach.views.profile_individual', args=(user_id)))
+            return HttpResponseRedirect(reverse('teach.views.profile', args=()))
         else:
-            # will return errors if any -- TODO :D
-            up = UserProfile()
-            form = UserProfileForm()
-            return render_to_response('profiles/create_profile.html', {'profile': up, 'form': form},
-                               context_instance=RequestContext(request))
+            return render_to_response('profiles/create_profile.html', { 'form': form }, context_instance=RequestContext(request))
     else:
         up = UserProfile()
         form = UserProfileForm()

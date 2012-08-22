@@ -4,4 +4,4 @@ from django.contrib.auth.models import User
 
 # lolling about the difference between ModelForm and Form
 class UserProfileForm(forms.Form):
-    favorite_animal = forms.CharField()
+    favorite_animal = forms.CharField(max_length=20)

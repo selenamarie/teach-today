@@ -6,6 +6,7 @@
 <ul>
 	<li><i>Your username is</i>: {{ profile.user.username }}</li>
 	<li><i>Your favorite animals are</i>: {{ profile.favorite_animal }}</li>
+	<li><a href="{% url teach.views.profile_create_or_update %}">Update your profile</a></li>
 </ul>
 
 {% if promises %}

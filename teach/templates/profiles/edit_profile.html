@@ -3,7 +3,18 @@
 {% block title %}Edit Profile{% endblock %}
  
 {% block body %}
+    <section>
+        {% if form.errors %}
+            <p>Something wasn't quite right in your promise making</p>
+        {% endif %}
 <h1>Edit contact info for {{ user }}</h1>
-<form action="" method="POST">{{ form }} <input id="submit" type="submit" name="submit" value="Update" /></form>
- 
+<form action="" method="POST">
+    <p>
+        {{ form.favorite_animal.errors }}
+        <label for="profile_favorite_animal">What is your favorite animal?"</label>
+        {{ form.favorite_animal }} 
+
+    </p>
+<input id="submit" type="submit" name="submit" value="Update" /></form>
+    </section> 
 {% endblock body %}
