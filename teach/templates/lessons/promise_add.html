@@ -10,47 +10,48 @@ Make a teaching promise
 {% endblock %}
 
 {% block body %}
+{% load bootstrap_toolkit %}
 
     <section>
         <h1 style="font-size: 56px; line-height: 70px;">
 
-        What if people  understood your work?
+        What if people understood what you do?
         </h1>
-        <h2 style="color: #D5926A">
-        Would it help them understand you?  Teaching will make you a better programmer, a better coworker and a better lover.  Make the world better by promising to teach, today.
-        </h2>
+        <h3 style="color: #D5926A; font-size: 32px; line-height: 40px">
+        Would it help them understand you better?  Teaching will make you a better programmer, a better coworker and a better lover.  Make the world better by promising to teach, today.
+        </h3>
     </section>
 
 
+    <p>&nbsp;</p>
+
     <section>
         {% if form.errors %}
-            <p>Something wasn't quite right in your promise making</p>
+            <p>Something wasn't quite right in your promise making...</p>
         {% endif %}
 
-        <form method="post" action="/lessons/promises/add/">
+        <form method="post" action="/lessons/promises/add/" class="form-inline">
         {% csrf_token %} 
-            <p>
                 {{ form.who.errors }}
-                <label for="promise_who">Who I promise to teach:</label>
-                {{ form.who }}
-            </p>
-            <p>
                 {{ form.when.errors }}
-                <label for="promise_when">When Am I going to teach this:<label>
-                {{ form.when }}
-            </p>
-            <p>
                 {{ form.lesson.errors }}
-                <label for="promise_lesson">Which lesson will I teach:<label>
-                {{ form.lesson }}
-                <input type="hidden" name="made_by" value="{{ made_by }}" />
-            <p>
                 {{ form.assessment.errors }}
-                <label for="promise_assessment">Which assessment to use:</label>
+
+                <h3 style="color: #D5926A; font-size: 32px; line-height: 40px">
+                I am going to teach 
+                <input type="text" name="who" class="focused-input input-xlarge" id="id_who" placeholder="a good friend or family member">
+                all about {{ form.lesson }} 
+                before 
+                <input type="text" name="when" id="id_when" placeholder="{% now "l, M d Y" %}"> 
+                and after, I'll have them answer this question: 
                 {{ form.assessment }} 
-                <br/>You can <a href="{% url lessons.views.add_assessment %}">add more assessments</a>.
+                <input type="hidden" name="made_by" value="{{ made_by }}" />
+                </h3>
+
+            <br/>
+            <p>
+            <input type="submit" value="Make a promise" class="btn btn-primary form-horizontal" />
             </p>
-            <input type="submit" value="Make a promise" />
         </form>
     </section>
 {% endblock %}

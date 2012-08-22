@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.contrib.auth.models import User
 
+import datetime
+
 from django.contrib.auth.decorators import login_required
 
 from lessons.models import Lesson, Promise, Assessment, AssessmentResponse
