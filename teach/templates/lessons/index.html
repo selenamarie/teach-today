@@ -12,6 +12,9 @@ Lessons
 </p>
 
 {% if latest_lessons %}
+    <p>
+    Latest 5 lessons added:
+    </p>
     <ul>
     {% for lesson in latest_lessons %}
         <li><a href="{{ lesson.url }}">{{lesson.name}}</a></li>
