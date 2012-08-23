@@ -17,7 +17,7 @@ Lessons
     </p>
     <ul>
     {% for lesson in latest_lessons %}
-        <li><a href="{{ lesson.url }}">{{lesson.name}}</a></li>
+        <li><a href="{{ lesson.url }}">{{lesson.name}}</a> <em>added {{ lesson.pub_date|date:"m/d/Y" }}</em> </li>
     {% endfor %}
     </ul>
 {% else %}
