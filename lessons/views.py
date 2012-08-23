@@ -93,7 +93,8 @@ def promise_add(request):
             return HttpResponseRedirect(reverse('lessons.views.promise_detail', args=(p.id,)))
         else:
             # will return errors if any, and prepopulate what was passed in before
-            return render_to_response('lessons/promise_add.html', { 'form': form }, context_instance=RequestContext(request))
+            made_by = request.user.id
+            return render_to_response('lessons/promise_add.html', { 'form': form, 'made_by': made_by }, context_instance=RequestContext(request))
     else: 
         form = PromiseMakeForm()    
         made_by = request.user.id

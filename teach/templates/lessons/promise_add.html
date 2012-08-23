@@ -12,9 +12,10 @@ Make a teaching promise
 {% block body %}
 {% load bootstrap_toolkit %}
 
+<link href="/static/css/bootstrap-datepicker.css" rel="stylesheet">
     <section>
 
-        <h1 style="text-shadow: none; color: #32ff25; font-size: 56px; line-height: 70px">
+        <h1 style="text-shadow: none; color: #92DF8D; font-size: 56px; line-height: 70px">
         Hey computery person:
         </h1>
 
@@ -47,7 +48,7 @@ Make a teaching promise
                 <input type="text" name="who" class="focused-input input-xlarge" id="id_who" placeholder="a good friend or family member">
                 all about {{ form.lesson }} 
                 before 
-                <input type="text" name="when" id="id_when" placeholder="{% now "l, M d Y" %}"> 
+                <input type="text" name="when" id="input01" placeholder="{% now "l, M d Y" %}"> 
                 and after, I'll have them answer this question: 
                 {{ form.assessment }} 
                 <input type="hidden" name="made_by" value="{{ made_by }}" />
@@ -59,4 +60,11 @@ Make a teaching promise
             </p>
         </form>
     </section>
+
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="/static/js/bootstrap-datepicker.js"></script>
+    <script>
+      $("#input01").datepicker({preventPast:true});
+    </script>
+
 {% endblock %}

@@ -19,9 +19,10 @@ class PromiseForm(forms.Form):
 # I HATE CHOICE FIELDS
 class PromiseMakeForm(forms.Form):
     who = forms.CharField()
-    when = forms.DateField(initial=datetime.date.today)
+    when = forms.DateField()
     made_by = forms.IntegerField()
     #lesson = forms.ChoiceField()
+
 # http://stackoverflow.com/questions/3419997/creating-a-dynamic-choice-field
     def __init__(self, *args, **kwargs):
         super(PromiseMakeForm, self).__init__(*args, **kwargs)
