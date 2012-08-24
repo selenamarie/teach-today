@@ -30,7 +30,7 @@ class Promise(models.Model):
         return "Teach <a href='/lessons/%i/'>%s</a> for <strong>%s</strong> on " % (self.lesson.id, self.lesson.name, self.who)
 
 class AssessmentResponse(models.Model):
-    pre = models.TextField()
+    pre = models.TextField(default='')
     post = models.TextField()
     promise = models.ForeignKey(Promise)
 
