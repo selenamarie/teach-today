@@ -42,16 +42,19 @@ def profile_individual(request, user):
     return render_to_response('profiles/profile_detail.html', {'profile': up, 'promises': promises})
 
 @login_required
-def profile_create_or_update(request):
+def profile_create_or_update(request, user=0):
     # TODO: verify that request.user.id == logged in userid
-    user_obj = User.objects.get(pk=request.user.id)
+    if user == 0:
+        user_obj = User.objects.get(pk=request.user.id)
+    else:
+        user_obj = User.objects.get(pk=user)
     up = ''
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
             try: 
                 up = UserProfile.objects.get(user=user_obj)
-            except IntegrityError: 
+            except: 
                 up = UserProfile()
             up.user = User.objects.get(pk=request.user.id)
             up.favorite_animal = form.cleaned_data['favorite_animal']

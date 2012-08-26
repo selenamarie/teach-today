@@ -30,7 +30,7 @@ class PromiseMakeForm(forms.Form):
         self.fields['assessment'] = forms.ChoiceField(choices=[ (o.id, str(o)) for o in Assessment.objects.all()])
 
 class AssessmentForm(forms.Form):
-    post = forms.CharField()
+    post = forms.CharField(widget=forms.widgets.Textarea())
 
 class AssessmentAddForm(forms.Form):
     question = forms.CharField(max_length=200)

@@ -10,10 +10,14 @@ Promises
 <a href="{% url lessons.views.promise_add %}">Make a promise!</a>
 </p>
 
+<p>
+Find the list of promises you've made to teach on your <a href="{% url teach.views.profile %}">profile</a>.
+</p>
+
 {% if latest_promises %}
 	<ul>
 	{% for promise in latest_promises %}
-		<li><a href="{% url teach.views.profile %}{{ promise.made_by.id }}">{{ promise.made_by.username }}</a> promised to teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }}, <a href="{{ promise.id }}">Edit</a></li>
+		<li><a href="{% url teach.views.profile %}{{ promise.made_by.id }}">{{ promise.made_by.username }}</a> promised to teach <a href='/lessons/{{ promise.lesson.id }}/'>{{ promise.lesson }}</a> to <strong>{{ promise.who }}</strong> on {{ promise.when|date:"m/d/Y" }} -- <a href="{{ promise.id }}">Completed?</a></li>
 	{% endfor %}
 	</ul>
 {% else %}
